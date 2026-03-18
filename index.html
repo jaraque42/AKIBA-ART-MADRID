@@ -1,0 +1,316 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>AKIBA Art Madrid</title>
+    <meta name="description" content="Perfil visual de AKIBA Art Madrid inspirado en la estructura de Instagram." />
+
+    <style>
+      :root {
+        --bg: #000;
+        --surface: #121212;
+        --surface-2: #1a1a1a;
+        --text: #f5f5f5;
+        --muted: #a8a8a8;
+        --border: #262626;
+        --accent: #f58529;
+        --accent-2: #dd2a7b;
+        --accent-3: #8134af;
+        --accent-4: #515bd4;
+        --max: 980px;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        background: var(--bg);
+        color: var(--text);
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      .container {
+        width: min(100% - 32px, var(--max));
+        margin: 0 auto;
+      }
+
+      .topbar {
+        position: sticky;
+        top: 0;
+        z-index: 20;
+        background: rgba(0, 0, 0, 0.86);
+        backdrop-filter: blur(8px);
+        border-bottom: 1px solid var(--border);
+      }
+
+      .topbar-inner {
+        height: 60px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .brand-logo {
+        width: 28px;
+        height: 28px;
+        border-radius: 8px;
+        object-fit: cover;
+      }
+
+      .brand-name {
+        font-size: 18px;
+        font-weight: 700;
+        letter-spacing: 0.01em;
+      }
+
+      .top-actions {
+        display: flex;
+        gap: 10px;
+      }
+
+      .chip {
+        border: 1px solid var(--border);
+        background: var(--surface);
+        color: var(--text);
+        font-size: 13px;
+        border-radius: 8px;
+        padding: 7px 10px;
+      }
+
+      main {
+        padding: 28px 0 48px;
+      }
+
+      .profile {
+        display: grid;
+        grid-template-columns: 120px 1fr;
+        gap: 28px;
+        align-items: start;
+        padding-bottom: 28px;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .avatar-wrap {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, var(--accent), var(--accent-2), var(--accent-3), var(--accent-4));
+        padding: 3px;
+      }
+
+      .avatar {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 3px solid #000;
+        background: #000;
+      }
+
+      .profile-head {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .handle {
+        font-size: 26px;
+        font-weight: 300;
+      }
+
+      .btn {
+        border: 1px solid var(--border);
+        background: var(--surface);
+        color: var(--text);
+        border-radius: 8px;
+        padding: 8px 12px;
+        font-size: 14px;
+        font-weight: 600;
+      }
+
+      .btn.primary {
+        background: #0095f6;
+        border-color: #0095f6;
+      }
+
+      .stats {
+        margin: 16px 0;
+        display: flex;
+        gap: 26px;
+        flex-wrap: wrap;
+      }
+
+      .stats span b {
+        margin-right: 6px;
+      }
+
+      .bio {
+        max-width: 560px;
+        line-height: 1.45;
+      }
+
+      .bio strong {
+        display: block;
+        margin-bottom: 4px;
+      }
+
+      .bio p {
+        margin: 0;
+        color: var(--text);
+      }
+
+      .bio .muted {
+        color: var(--muted);
+      }
+
+      .tabs {
+        display: flex;
+        justify-content: center;
+        gap: 28px;
+        border-bottom: 1px solid var(--border);
+        margin-top: 22px;
+      }
+
+      .tab {
+        padding: 14px 0;
+        font-size: 12px;
+        letter-spacing: 0.09em;
+        text-transform: uppercase;
+        color: var(--muted);
+        border-top: 1px solid transparent;
+      }
+
+      .tab.active {
+        color: var(--text);
+        border-top-color: var(--text);
+      }
+
+      .grid {
+        padding-top: 20px;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 6px;
+      }
+
+      .post {
+        aspect-ratio: 1 / 1;
+        background: var(--surface-2);
+        border: 1px solid var(--border);
+        overflow: hidden;
+      }
+
+      .post img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+
+      .post-fallback {
+        width: 100%;
+        height: 100%;
+        display: grid;
+        place-items: center;
+        color: var(--muted);
+        font-size: 13px;
+        text-align: center;
+        padding: 12px;
+      }
+
+      @media (max-width: 760px) {
+        .profile {
+          grid-template-columns: 84px 1fr;
+          gap: 16px;
+        }
+
+        .avatar-wrap {
+          width: 84px;
+          height: 84px;
+        }
+
+        .handle {
+          font-size: 22px;
+        }
+
+        .grid {
+          gap: 3px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <header class="topbar">
+      <div class="container topbar-inner">
+        <a class="brand" href="#">
+          <img class="brand-logo" src="imagenes/logo/AKIBA.jpg" alt="AKIBA" />
+          <span class="brand-name">AKIBA</span>
+        </a>
+        <div class="top-actions">
+          <a class="chip" href="https://www.instagram.com/akiba_art_madrid/related_profiles/" target="_blank" rel="noreferrer noopener">Instagram</a>
+        </div>
+      </div>
+    </header>
+
+    <main class="container">
+      <section class="profile">
+        <div class="avatar-wrap">
+          <img class="avatar" src="imagenes/logo/AKIBA.jpg" alt="AKIBA Art Madrid" />
+        </div>
+
+        <div>
+          <div class="profile-head">
+            <h1 class="handle">akiba_art_madrid</h1>
+            <a class="btn primary" href="https://www.instagram.com/akiba_art_madrid/related_profiles/" target="_blank" rel="noreferrer noopener">Seguir</a>
+            <a class="btn" href="https://www.instagram.com/akiba_art_madrid/related_profiles/" target="_blank" rel="noreferrer noopener">Mensaje</a>
+          </div>
+
+          <div class="stats">
+            <span><b>24</b> publicaciones</span>
+            <span><b>1.2k</b> seguidores</span>
+            <span><b>321</b> seguidos</span>
+          </div>
+
+          <div class="bio">
+            <strong>AKIBA Art Madrid</strong>
+            <p>Arte contemporáneo · Exposición · Archivo visual</p>
+            <p class="muted">Capturando la esencia visual del proyecto y su identidad.</p>
+          </div>
+        </div>
+      </section>
+
+      <nav class="tabs" aria-label="Secciones">
+        <span class="tab active">Publicaciones</span>
+        <span class="tab">Reels</span>
+        <span class="tab">Etiquetadas</span>
+      </nav>
+
+      <section class="grid" aria-label="Cuadrícula de publicaciones">
+        <article class="post"><div class="post-fallback">Post 1</div></article>
+        <article class="post"><div class="post-fallback">Post 2</div></article>
+        <article class="post"><div class="post-fallback">Post 3</div></article>
+        <article class="post"><div class="post-fallback">Post 4</div></article>
+        <article class="post"><div class="post-fallback">Post 5</div></article>
+        <article class="post"><div class="post-fallback">Post 6</div></article>
+        <article class="post"><div class="post-fallback">Post 7</div></article>
+        <article class="post"><div class="post-fallback">Post 8</div></article>
+        <article class="post"><div class="post-fallback">Post 9</div></article>
+      </section>
+    </main>
+  </body>
+</html>
