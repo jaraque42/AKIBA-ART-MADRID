@@ -1078,7 +1078,7 @@
       position: fixed;
       right: 18px;
       bottom: 18px;
-      z-index: 250;
+      z-index: 320;
       border: 1px solid var(--accent);
       background: rgba(196,84,26,0.92);
       color: var(--text);
@@ -1094,7 +1094,7 @@
       right: 18px;
       bottom: 68px;
       width: min(360px, calc(100vw - 24px));
-      z-index: 250;
+      z-index: 320;
       border: 1px solid var(--border-soft);
       background: rgba(16,13,10,0.95);
       display: none;
@@ -1931,7 +1931,8 @@
 
   // Cookie consent
   function readCookie(name) {
-    const match = document.cookie.match(new RegExp('(?:^|; )' + name.replace(/[.$?*|{}()[\\]\\\\/+^]/g, '\\$&') + '=([^;]*)'));
+    // Escapa caracteres especiales para buscar en la cookie
+    const match = document.cookie.match(new RegExp('(?:^|; )' + name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '=([^;]*)'));
     return match ? decodeURIComponent(match[1]) : '';
   }
 
@@ -2098,13 +2099,15 @@
   });
 
   // Chat widget
-  chatFab.addEventListener('click', () => {
-    setChatOpen(!chatPanel.classList.contains('open'));
-  });
+  if (chatFab && chatPanel && chatClose && chatCompose && chatInput) {
+    chatFab.addEventListener('click', () => {
+      console.log('chatFab clicked, open?', chatPanel.classList.contains('open'));
+      setChatOpen(!chatPanel.classList.contains('open'));
+    });
 
-  chatClose.addEventListener('click', () => setChatOpen(false));
+    chatClose.addEventListener('click', () => setChatOpen(false));
 
-  chatCompose.addEventListener('submit', (e) => {
+    chatCompose.addEventListener('submit', (e) => {
     e.preventDefault();
     const text = chatInput.value.trim();
     if (!text) return;
@@ -2112,6 +2115,12 @@
     chatInput.value = '';
     botReply('Gracias por tu mensaje. Si quieres, puedes dejar tus datos en el formulario y te contactamos.');
   });
+
+  } else {
+    console.warn('Chat widget initialization falló:', {
+      chatFab, chatPanel, chatClose, chatCompose, chatInput,
+    });
+  }
 
   document.querySelectorAll('.chat-quick-btn').forEach((button) => {
     button.addEventListener('click', () => {

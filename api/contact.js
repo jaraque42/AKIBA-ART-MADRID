@@ -4,8 +4,8 @@ export default async function handler(req, res) {
   }
 
   const apiKey = process.env.RESEND_API_KEY;
-  const toEmail = process.env.CONTACT_TO_EMAIL;
-  const fromEmail = process.env.CONTACT_FROM_EMAIL;
+  const toEmail = process.env.LEADS_TO;
+  const fromEmail = process.env.RESEND_FROM;
 
   if (!apiKey || !toEmail || !fromEmail) {
     return res.status(500).json({
